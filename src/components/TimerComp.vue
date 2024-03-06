@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <main >
         timerComp
-    </div>
+    </main>
 </template>
 <script lang="ts">
 export default {
