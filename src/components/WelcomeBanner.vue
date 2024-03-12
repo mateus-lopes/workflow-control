@@ -1,5 +1,5 @@
 <template>
-    <section class="text-center">
+    <section class="text-center dark:text-white">
         <h2 class="animate__animated animate__bounce text-5xl md:text-7xl font-bold mb-6">Welcome to</h2>
         <h1 class="text-8xl lg:text-9xl font-light flex justify-center">
             <div class="animate__animated animate__bounceInLeft">Workflow</div>

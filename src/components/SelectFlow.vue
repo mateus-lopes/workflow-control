@@ -1,31 +1,32 @@
 <template>
     <div class="text-center">
-        <h3 class="text-gray-300 text-2xl mt-11 mb-6 font-semibold">Select the flow</h3>
-        <div class="flex flex-col md:flex-row justify-center items-center gap-8">
-            <select-option @click="initNewTimer('fast')" title="fast" background="#8CE8A1" color="0F2C15" />
-            <select-option @click="initNewTimer('regular')" title="regular" background="#FFD88B" color="2C260F" />
-            <select-option @click="initNewTimer('intense')" title="intense" background="#FF7C7C" color="310E0E" />
-        </div>
+      <h3 class="text-gray-300 text-2xl mt-11 mb-6 font-semibold">Select the flow</h3>
+      <info-comp />
+      <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+        <select-option
+          v-for="(option, index) in flowOptions"
+          :key="index"
+          @click="addNewFlow(option as Flow)"
+          :title="option.title"
+          :styles="option.styles"
+        />
+      </div>
     </div>
 </template>
-<script lang="ts">
+  
+<script lang="ts" setup>
 import SelectOption from './SelectOption.vue'
+import { flowOptions } from '../utils/options'
 import { useSetting } from '../store/setting';
 import { useTimer } from '../store/timer';
+import { Flow } from '@/types/Flow';
 
-export default {
-    components: { SelectOption },
-    setup() {
-        const settingStore = useSetting();
-        const timerStore = useTimer();
+const settingStore = useSetting();
+const timerStore = useTimer();
 
-        const initNewTimer = (flow: string) => {
-            if(timerStore.timerType === flow) return
-            settingStore.startFlow()
-            timerStore.changeTimerType(flow)
-        }
-
-        return { settingStore, initNewTimer };
-    },
+const addNewFlow = (option: Flow) => {
+  settingStore.startFlow()
+  console.log(option)
+  timerStore.setFlow(option)
 }
 </script>
